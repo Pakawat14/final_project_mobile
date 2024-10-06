@@ -32,8 +32,6 @@ class DatabaseHelper {
   }
 
   
-
-
   // ดึงข้อมูลสินค้าแบบเรียลไทม์
   Stream<QuerySnapshot> getStream() {
     return collection.snapshots();

@@ -317,36 +317,61 @@ class DetailScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'ชื่อผู้จองเเละรายละเอียด: ${productdetail.name}',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              Divider(),
-                              Text(
-                                'เเม่บ้านที่เลือก: ${productdetail.description}',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              Divider(),
-                              Text(
-                                'ที่อยู่: ${productdetail.address}',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              Divider(),
-                              Text(
-                                'เบอร์โทร: ${productdetail.contactnumber}',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              Divider(),
-                              Text(
-                                'เวลาการจอง: ${productdetail.bookingTime}',
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                            ],
+  Row(
+    children: [
+      Icon(Icons.person, color: Colors.blue), // Icon with color
+      SizedBox(width: 8), // Space between the icon and text
+      Text(
+        'ชื่อผู้จองเเละรายละเอียด: ${productdetail.name}',
+        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+      ),
+    ],
+  ),
+  Divider(),
+  Row(
+    children: [
+      Icon(Icons.cleaning_services, color: Colors.green),
+      SizedBox(width: 8),
+      Text(
+        'เเม่บ้านที่เลือก: ${productdetail.description}',
+        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+      ),
+    ],
+  ),
+  Divider(),
+  Row(
+    children: [
+      Icon(Icons.location_on, color: Colors.red),
+      SizedBox(width: 8),
+      Text(
+        'ที่อยู่: ${productdetail.address}',
+        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+      ),
+    ],
+  ),
+  Divider(),
+  Row(
+    children: [
+      Icon(Icons.phone, color: Colors.orange),
+      SizedBox(width: 8),
+      Text(
+        'เบอร์โทร: ${productdetail.contactnumber}',
+        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+      ),
+    ],
+  ),
+  Divider(),
+  Row(
+    children: [
+      Icon(Icons.access_time, color: Colors.purple),
+      SizedBox(width: 8),
+      Text(
+        'เวลาการจอง: ${productdetail.bookingTime}',
+        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+      ),
+    ],
+  ),
+],
                           ),
                         ),
                       ),
