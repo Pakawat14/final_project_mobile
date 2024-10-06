@@ -53,75 +53,79 @@ class _ProductListScreenState extends State<ProductListScreen> {
               children: [
                 // ส่วนของโฆษณา
                 Container(
-                  height: 400, // ปรับความสูงของกรอบให้ใหญ่ขึ้น
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 5, // จำนวนโฆษณาที่จะแสดง (เพราะมี 5 รูป)
-                    itemBuilder: (context, index) {
-                      String imagePath = 'assets/images/maaban${index + 1}.png';
+  height: 400, // Adjust the height
+  child: ListView.builder(
+    scrollDirection: Axis.horizontal,
+    itemCount: 5, // Number of images
+    itemBuilder: (context, index) {
+      String imagePath = 'assets/images/maaban${index + 1}.png';
 
-                      return Container(
-                        width: 300, // ปรับความกว้างของกรอบให้ใหญ่ขึ้น
-                        margin: EdgeInsets.all(16.0), // เพิ่ม margin รอบๆ กรอบ
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                              16.0), // เพิ่มความโค้งให้กรอบ
-                          gradient: LinearGradient(
-                            colors: [Colors.orange[300]!, Colors.orange[600]!],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ), // เพิ่ม gradient ที่ทำให้ดูสวยงามมากขึ้น
-                          boxShadow: [
-                            BoxShadow(
-                              color:
-                                  Colors.black.withOpacity(0.2), // เงาสีดำอ่อน
-                              blurRadius: 8, // ความเบลอของเงา
-                              offset: Offset(4, 4), // ทิศทางของเงา
-                            ),
-                          ],
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                              16.0), // ให้รูปภาพมีมุมโค้งเหมือนกับกรอบ
-                          child: Column(
-                            children: [
-                              Expanded(
-                                flex:
-                                    4, // ใช้ flex เพื่อเพิ่มพื้นที่ให้กับรูปภาพ
-                                child: Image.asset(
-                                  imagePath, // แสดงรูปภาพจาก assets
-                                  fit: BoxFit
-                                      .cover, // จัดการให้รูปภาพครอบคลุมพื้นที่
-                                ),
-                              ),
-                              SizedBox(
-                                  height:
-                                      10), // เพิ่มพื้นที่ระหว่างรูปภาพกับข้อความ
-                              Expanded(
-                                flex: 1, // พื้นที่สำหรับข้อความโฆษณา
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 8.0),
-                                  child: Text(
-                                    'เเม่บ้านทำความสะอาดหมายเลขที่ ${index + 1}', // ข้อความโฆษณา
-                                    textAlign: TextAlign
-                                        .center, // จัดให้ข้อความอยู่กลาง
-                                    style: TextStyle(
-                                      color: Colors.white, // เปลี่ยนสีตัวอักษร
-                                      fontSize: 18, // ขนาดฟอนต์
-                                      fontWeight:
-                                          FontWeight.bold, // ทำให้ตัวหนา
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
+      return GestureDetector(
+        onTap: () {
+          // Navigate to the details screen on tap
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ImageDetailsScreen(
+                imagePath: imagePath,
+                index: index,
+              ),
+            ),
+          );
+        },
+        child: Container(
+          width: 300, // Adjust the width
+          margin: EdgeInsets.all(16.0), // Add margin around the container
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16.0), // Add rounded corners
+            gradient: LinearGradient(
+              colors: [Colors.orange[300]!, Colors.orange[600]!],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ), // Add gradient
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2), // Light black shadow
+                blurRadius: 8, // Blur radius of shadow
+                offset: Offset(4, 4), // Shadow offset direction
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16.0), // Rounded corners for the image
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 4, // Flex for the image
+                  child: Image.asset(
+                    imagePath, // Display image from assets
+                    fit: BoxFit.cover, // Make sure the image covers the space
                   ),
                 ),
+                SizedBox(height: 10), // Space between image and text
+                Expanded(
+                  flex: 1, // Flex for the text
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      'เเม่บ้านทำความสะอาดหมายเลขที่ ${index + 1}', // Ad text
+                      textAlign: TextAlign.center, // Center the text
+                      style: TextStyle(
+                        color: Colors.white, // Change text color
+                        fontSize: 18, // Font size
+                        fontWeight: FontWeight.bold, // Bold text
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  ),
+),
 
                 // ส่วนของข้อมูล
                 Expanded(
@@ -279,6 +283,64 @@ class _ProductListScreenState extends State<ProductListScreen> {
     );
   }
 }
+class ImageDetailsScreen extends StatelessWidget {
+  final String imagePath;
+  final int index;
+
+  ImageDetailsScreen({required this.imagePath, required this.index});
+
+  // This method returns unique information based on the image index
+  String getImageDescription(int index) {
+    switch (index) {
+      case 0:
+        return 'นางสาวสมหญิง ใจดี: แม่บ้านมากประสบการณ์กว่า 10 ปี เชี่ยวชาญในการทำความสะอาดทุกประเภท โดยเฉพาะงานทำความสะอาดบ้านและสำนักงานขนาดใหญ่';
+      case 1:
+        return 'นางสาวปรียา พิถีพิถัน: แม่บ้านที่ใส่ใจรายละเอียดในการทำความสะอาด เน้นการใช้ผลิตภัณฑ์ที่ปลอดภัยกับเด็กและสัตว์เลี้ยง';
+      case 2:
+        return 'นางสาวมณีวรรณ ขยัน: เชี่ยวชาญการทำความสะอาดบ้านพักและคอนโด พร้อมกับบริการซักผ้าและรีดผ้าอย่างมืออาชีพ';
+      case 3:
+        return 'นางสาวสุดารัตน์ ปลอดภัย: แม่บ้านที่เน้นความสะอาดและสุขอนามัย ใช้อุปกรณ์และน้ำยาฆ่าเชื้อที่ผ่านการรับรอง';
+      case 4:
+        return 'นางสาววิไลวรรณ สุภาพ: แม่บ้านที่เน้นการบริการด้วยความสุภาพเรียบร้อย และการทำความสะอาดอย่างเป็นระเบียบ ชำนาญในงานจัดระเบียบบ้านและคอนโด';
+      default:
+        return 'แม่บ้าน: ข้อมูลทั่วไป';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('ประวัติแม่บ้านคนที่ ${index + 1}'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16.0),
+              child: Image.asset(
+                imagePath, // Show the image
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'รายละเอียดของเเม่บ้านทำความสะอาดหมายเลขที่ ${index + 1}', // Example history or details
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+            Text(
+              getImageDescription(index), // Display the unique description based on index
+              style: TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({Key? key, required this.productdetail}) : super(key: key);
